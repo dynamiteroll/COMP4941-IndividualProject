@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\backend\\backend",
+    "\\backend\\backend\\Models"
+  ],
+  "SelectedNode": "\\backend\\backend\\Models\\DbLogic.cs",
+  "PreviewInSolutionExplorer": false
+}
