@@ -17,8 +17,8 @@ Possible future features:
 - being able to view other people's lists
 
 Some requirements:
-connect using your own MS SQL Server instance/connectionString
-create the tables on MS SQL Server Management Studio using the supplied "SQLQuery1.sql" file
-get an API key from OMDB api using link here: https://www.omdbapi.com/
-run asp.net backend using visual studio
-run react frontend with visual studio code with cmd npm start (this is CRA btw)
+- connect using your own MS SQL Server instance/connectionString
+- create the tables on MS SQL Server Management Studio using the supplied "SQLQuery1.sql" file
+- get an API key from OMDB api using link here: https://www.omdbapi.com/
+- run asp.net backend using visual studio
+- run react frontend with visual studio code with cmd npm start (this is CRA btw)
