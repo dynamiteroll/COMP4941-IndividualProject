@@ -56,8 +56,8 @@ namespace backend.Controllers
             {
                 SqlConnection conn = new SqlConnection(_configuration.GetConnectionString("WEBAPP").ToString());
 
-
                 res = db.login(users, conn);
+
                 return res;
             }
             catch (Exception ex)
@@ -65,12 +65,11 @@ namespace backend.Controllers
                 Console.WriteLine(ex.ToString());
                 return res;
             }
-           
 
         }
 
 
-        //for the future idk
+        //possible future feature
         //[HttpPost]
         //[Route("viewUserProfile")]
         //public Response viewUserProfile(Users users) 
@@ -91,6 +90,5 @@ namespace backend.Controllers
         //    Response res = db.updateUser(users, conn);
         //    return res;
         //}
-
     }
 }

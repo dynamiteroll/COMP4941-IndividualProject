@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
 import '../styles/Register.css';
 
 
@@ -20,12 +21,16 @@ export default function Register() {
             Email: email,
             Password: password
         }
-        const url = 'https://localhost:7212/api/Users/register';
+        const url = 'https://localhost:7212/api/Users/register'; // url to backend, may differ
         axios.post(url, data).then((response) => {
             const dt = response.data;
             console.log(dt);
             alert("Registration successful");
-        }).catch((error) => {
+        }).then(() => {
+            window.location.href = "./login";
+        })
+        
+        .catch((error) => {
             console.log(error);
             alert(error);
         });
@@ -43,7 +48,9 @@ export default function Register() {
                 <input type="email" placeholder="johndoe@gmail.com" onChange={(e) => setEmail(e.target.value)}></input>
                 <label htmlFor="password">Enter Password</label>
                 <input type="password" placeholder="********"  onChange={(e) => setPassword(e.target.value)}></input>
-                <button id="regBtn" type="button" onClick = {() => handleSave()}>Register</button>
+                <Button variant="primary" onClick={(e) => handleSave(e)}>Register</Button>
+                <a id="logLink" type="button" onClick = {() => window.location.href = "./login"}>Already have an account? Login</a>
+                <a id="logLink" type="button" onClick = {() => window.location.href = "./"}>Return to homepage</a>
             </form>
         </div>
     );

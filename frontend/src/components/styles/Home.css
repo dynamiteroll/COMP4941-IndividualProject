@@ -1,0 +1,36 @@
+.homeContainer {
+    /* source = https://www.publicdomainpictures.net/en/view-image.php?image=21127&picture=film-background*/
+    background-image: url("../imgs/film-background-1334067869u9d.jpg");
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.light {
+    background-color: #d1d1d1;
+}
+
+.navbar {
+    margin: .5rem;
+    border-radius: 5px;
+}
+
+.card {
+    background-color: #e7e7e7;
+    border-radius: 5px;
+    margin-top: 3rem;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 1rem;
+    border: 0;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .card {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+

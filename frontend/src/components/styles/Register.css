@@ -8,8 +8,9 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 70%;
     background-color: #f5f5f5;
+    border-radius: 10px;
 }
 
 .registerForm > * {
@@ -17,16 +18,20 @@
     margin-bottom: 0.5rem;
 }
 
-#regBtn {
-    width: 8rem;
-    height: 2rem;
-    font-size: 1rem;
-    border: none;
-    background-color: dodgerblue;
-    color: white;
+input {
+    border-radius: 5px;
+    border: 1px solid #6d6d6d;
 }
 
-#regBtn:hover {
-    background-color: #1e90ff;
+
+
+#logLink {
+    text-align: center;
+    text-decoration: none;
+
+}
+
+#logLink:hover {
+    color: dodgerblue;
     transition: 0.3s;
 }

@@ -1,0 +1,23 @@
+.listContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* .card {
+    justify-self: stretch;
+} */
+
+
+
+@media screen and (max-width: 1024px) {
+    .listContainer {
+        grid-template-columns: 100%;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .card {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

@@ -1,16 +1,21 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
+using backend.Controllers;
 
 namespace backend.Models
 {
     public class DbLogic
     {
+        // supposed to be for session variables, but doesn't work
+        //private readonly IHttpContextAccessor context;
+
         public Response register(Users users, SqlConnection conn)
         {
             Response res = new Response();
 
-            //hashing doesn't work now, maybe sometime in the future 
+            //hashing currently doesn't work
             //string hashedPassword = BCrypt.Net.BCrypt.HashPassword(users.Password);
+
             string queryString = "INSERT INTO Users(Username, Email, Password) VALUES('" + users.Username + "','" + users.Email + "','" + users.Password + "')";
 
             SqlCommand cmd = new SqlCommand(queryString, conn);
@@ -36,8 +41,9 @@ namespace backend.Models
         {
             Response res = new Response();
 
-            //hashing doesn't work now, maybe sometime in the future 
+            //hashing doesn't currently work
             //string hashedPassword = BCrypt.Net.BCrypt.HashPassword(users.Password);
+
             string queryString = "SELECT * FROM Users WHERE Email = '" + users.Email + "' AND Password = '" + users.Password + "'";
           
 
@@ -45,10 +51,9 @@ namespace backend.Models
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand(queryString, conn);
-                SqlDataReader reader= cmd.ExecuteReader();
+                SqlDataAdapter da = new SqlDataAdapter(queryString, conn);
                 DataTable dt = new DataTable();
-                dt.Load(reader);
+                da.Fill(dt);
 
                 if (dt.Rows.Count > 0)
                 {
@@ -58,30 +63,35 @@ namespace backend.Models
                     user.UserID = Convert.ToInt32(dt.Rows[0]["UserID"]);
                     user.Username = Convert.ToString(dt.Rows[0]["Username"]);
                     user.Email = Convert.ToString(dt.Rows[0]["Email"]);
-                    res.user = user;
+
+
+                    // for session variables, currently doesn't work
+                    //string username = user.Username;
+                    //SessionController sc = new SessionController((HttpContextAccessor)context);
+                    //IEnumerable<string> session = sc.GetSessionInfo(username);
+
+                    //res.Session = (SessionVariables)session;
+                    res.User = user;
                 }
                 else
                 {
                     res.StatusCode = 100;
                     Console.WriteLine("user not found");
                     res.StatusMessage = "User doesn't exist or isn't valid";
-                    res.user = null;
+                    res.User = null;
                 }
+                return res;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
                 conn.Close();
+                return res;
             }
-
-
             
-
-            return res;
         }
 
-
-        //maybe in the future idk
+        // possible future feature
         //public Response viewUserProfile(Users users, SqlConnection conn)
         //{
         //    SqlDataAdapter da = new SqlDataAdapter("p_viewUserProfile", conn);
@@ -141,5 +151,124 @@ namespace backend.Models
         //    return res;
 
         //}
+
+        public Response addMovie(Movie movie, SqlConnection conn)
+        {
+            Response res = new Response();
+
+            string queryString = "INSERT INTO Movie(UserID, MovieID, Poster, Title, Year) VALUES('" + movie.UserID + "','" + movie.MovieID + "','" + movie.Poster + 
+                "','" + movie.Title + "','" + movie.Year + "')";
+
+
+            SqlCommand cmd = new SqlCommand(queryString, conn);
+            conn.Open();
+
+            int i = cmd.ExecuteNonQuery();
+
+            conn.Close();
+            if (i > 0)
+            {
+                res.StatusCode = 200;
+                res.StatusMessage = "Movie added successfully";
+                res.Movie = movie;
+            }
+            else
+            {
+                res.StatusCode = 100;
+                res.StatusMessage = "Add movie failed: request to the server failed";
+            }
+
+            return res;
+        }
+
+        public Response getMovies(string UserID, SqlConnection conn) 
+        {
+            Response res = new Response();
+            string queryString = "SELECT * FROM Movie where UserID = '" + UserID + "'";
+
+
+            try
+            {
+                conn.Open();
+
+                SqlDataAdapter da = new SqlDataAdapter(queryString, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+
+                List<Movie> list = new List<Movie>();
+
+
+                if (dt.Rows.Count > 0)
+                {
+                    
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Movie movie = new Movie();
+                        movie.UserID = Convert.ToInt32(dt.Rows[i]["UserID"]);
+                        movie.MovieID = Convert.ToString(dt.Rows[i]["MovieID"]);
+                        movie.Poster = Convert.ToString(dt.Rows[i]["Poster"]);
+                        movie.Title = Convert.ToString(dt.Rows[i]["Title"]);
+                        movie.Year = Convert.ToInt32(dt.Rows[i]["Year"]);
+                        list.Add(movie);
+                    }
+
+
+                        res.StatusCode = 200;
+                        res.StatusMessage = "Movie data fetched";
+                        res.MovieList = list;
+                    
+
+                }
+                else
+                {
+                    res.StatusCode = 100;
+                    res.StatusMessage = "No movies found";
+                    res.MovieList = null;
+                }
+                conn.Close();
+                return res;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                conn.Close();
+
+                return res;
+            }
+
+
+        }
+
+        public Response deleteMovie(Movie movie, SqlConnection conn)
+        {
+            Response res = new Response();
+            string queryString = "DELETE FROM Movie WHERE UserID = '" + movie.UserID + "' AND MovieID = '" + movie.MovieID + "'";
+
+            SqlCommand cmd = new SqlCommand(queryString, conn);
+            conn.Open();
+
+            int i = cmd.ExecuteNonQuery();
+
+            conn.Close();
+            if (i > 0)
+            {
+                res.StatusCode = 200;
+                res.StatusMessage = "Movie deleted successfully";
+                res.Movie = movie;
+            }
+            else
+            {
+                res.StatusCode = 100;
+                res.StatusMessage = "Delete movie failed: request to the server failed";
+            }
+
+            return res;
+        }
+
+
+
+
     }
 }

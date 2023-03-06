@@ -3,9 +3,10 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/pages/Dashboard";
-import Profile from "./components/pages/Profile";
 import PrivateRoutes from "./components/utils/PrivateRoutes";
 import Home from "./components/pages/Home";
+import AddEntry from "./components/pages/AddEntry";
+//import Profile from "./components/pages/Profile"; // possible future feature
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route element={<PrivateRoutes/>}>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/addentry" element={<AddEntry />} />
+                {/* <Route path="/profile" element={<Profile/>} /> */} {/* possible future feature */}
               </Route>
-              {/* <Route path="/profile" element={<Profile />} /> */}
           </Routes>
       </Router>
     </div>

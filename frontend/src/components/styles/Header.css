@@ -1,0 +1,58 @@
+.navBar{
+    background-color: #e7e7e7;
+
+}
+
+.navBar > span {
+    margin-right: 0;
+}
+
+.navBar-text {
+    margin-right: 2rem;
+}
+
+.addEntry {
+    margin-right: 2rem;
+}
+
+.back-button {
+    color: #292929;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.back-button:hover {
+    color: #494949;
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+    .navBar {
+        flex-direction: column;
+    }
+
+    .navBar > span {
+        margin-right: 0;
+    }
+
+    .navbar > a {
+        margin-right: 0;
+    }
+
+    .navBar-text {
+        margin-right: 0;
+    }
+
+    .addEntry {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+
+    .navBar-right {
+        flex-direction: column;
+    }
+
+
+}

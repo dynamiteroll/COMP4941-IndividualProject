@@ -5,11 +5,16 @@
         public int StatusCode { get; set; }
         public string StatusMessage { get; set; }
 
-        //might need this when searching for users later on
-        public List<Users> listUsers { get; set; }
+        public Users User { get; set; }
 
-        public Users user { get; set; }
+        //for the future probably
+        //public List<Users> listUsers { get; set; }
 
-        //eventually will add more for the movies part
+        //for session variables, currently doesn't work
+        //public SessionVariables Session { get; set; }
+
+        public Movie Movie { get; set; }
+
+        public List<Movie> MovieList { get; set; }
     }
 }

@@ -1,16 +1,12 @@
 import React, {useState} from "react";
 import "../styles/Login.css"
+import Button from 'react-bootstrap/Button';
 import axios from "axios";
 
-
-
 export default function Login() {
-    
 
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
-
-    
 
     const handleEmailChange = (value) => {
         setEmail(value);
@@ -32,17 +28,19 @@ const handleSave = (e) => {
         Email: email,
         Password: password
     }
-    const url = 'https://localhost:7212/api/Users/login';
+    const url = 'https://localhost:7212/api/Users/login'; // url to backend, may differ
     axios.post(url, data).then((response) => {
         const dt = response.data;
         console.log(dt);
 
         if (dt.statusMessage === "User doesn't exist or isn't valid") {
-            alert("User doesn't exist or isn't valid");
+            alert("Invalid credentials or user doesn't exist");
             return;
         } else {
-            // localStorage.setItem("token", dt.token); save this when doing session variables
+            // localStorage.setItem("token", dt.session.sessionkeysessionid); //save this when doing session variables
             localStorage.setItem("isLoggedIn", true);
+            localStorage.setItem("name", dt.user.username);
+            localStorage.setItem("userID", dt.user.userID);
             window.location.href = "./dashboard";
         }
         
@@ -61,8 +59,9 @@ const handleSave = (e) => {
                 <input type="email" placeholder="johndoe@gmail.com" onChange={(e) => handleEmailChange(e.target.value)}></input>
                 <label htmlFor="password">Enter Password</label>
                 <input type="password" placeholder="********"  onChange={(e) => handlePasswordChange(e.target.value)}></input>
-                <button id="loginBtn" type="button" onClick = {(e) => handleSave(e)}>login</button>
+                <Button variant="primary" onClick={(e) => handleSave(e)}>Login</Button>
                 <a id="regLink" type="button" onClick = {() => window.location.href = "./register"}>No account? Register</a>
+                <a id="regLink" type="button" onClick = {() => window.location.href = "./"}>Return to homepage</a>
             </form>        
         </div>
 

@@ -1,0 +1,19 @@
+.searchBar {
+    /* width: 40%; */
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.error-message {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .error-message {
+        font-size: 1rem;
+        margin-left: .5rem;
+        margin-right: .5rem;
+    }
+}

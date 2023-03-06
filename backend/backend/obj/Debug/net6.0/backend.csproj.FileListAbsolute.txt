@@ -37,3 +37,4 @@ C:\CliServProjects\COMP4941-IndividualProject\backend\backend\obj\Debug\net6.0\b
 C:\CliServProjects\COMP4941-IndividualProject\backend\backend\obj\Debug\net6.0\backend.genruntimeconfig.cache
 C:\CliServProjects\COMP4941-IndividualProject\backend\backend\obj\Debug\net6.0\ref\backend.dll
 C:\CliServProjects\COMP4941-IndividualProject\backend\backend\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\CliServProjects\COMP4941-IndividualProject\backend\backend\bin\Debug\net6.0\System.Security.Permissions.dll
